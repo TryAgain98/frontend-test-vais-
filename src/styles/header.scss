@@ -1,0 +1,270 @@
+@import "./variables.scss";
+
+.header {
+  display: flex;
+  padding: 18px 0;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+  position: relative;
+  @include table {
+    border: none;
+    padding: 10px 15px;
+  }
+
+  .left-navbar {
+    width: 43%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    .navbar-item {
+      min-width: 72px;
+      text-align: center;
+      @include fontDefault;
+      cursor: pointer;
+      margin-top: 6px;
+      color: $text-color;
+      position: relative;
+      @include table {
+        display: none;
+      }
+      &:hover {
+        font-weight: bold;
+        .navbar-item-active {
+          border-bottom: 4px solid $primary-color;
+          position: absolute;
+          top: 48px;
+          width: 100%;
+        }
+      }
+    }
+  }
+  .logo {
+    margin-top: 2px;
+    width: 100px;
+    height: 16px;
+    cursor: pointer;
+    margin-right: 30px;
+  }
+  .mobile-navbar-container {
+    display: none;
+    @include table {
+      margin-right: 10px;
+      display: block;
+    }
+    .menu {
+      cursor: pointer;
+    }
+    .nav-bar-background,
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .nav-bar-background {
+      background-color: black;
+      z-index: 11;
+      opacity: 0.5;
+    }
+    .mobile-nav {
+      padding: 30px;
+      background-color: $white;
+      width: 80%;
+      z-index: 12;
+      animation-name: openNavBarMobile;
+      animation-duration: 0.5s;
+      .icon-close {
+        width: 20px;
+        height: 20px;
+        margin-bottom: 50px;
+        cursor: pointer;
+      }
+      .mobile-navbar-item {
+        font-size: 17px;
+        font-weight: bold;
+      }
+    }
+    .mobile-nav-close {
+     display: none;
+      animation-name: closeNavBarMobile;
+    }
+  }
+
+  @keyframes openNavBarMobile {
+    0% {
+      margin-left: -80%;
+    }
+    100% {
+      margin-left: 0;
+    }
+  }
+
+  @keyframes closeNavBarMobile {
+    0% {
+      margin-left: 0%;
+      padding: 30px;
+    }
+    100% {
+      margin-left: -80%;
+    }
+  }
+
+  .right-navbar {
+    display: flex;
+    align-items: center;
+
+    .carts {
+      // position: relative;
+      .cart--top {
+        position: relative;
+      }
+      .icon-cart {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        &:hover {
+          filter: brightness(0.5);
+        }
+      }
+      .icon-cart--active {
+        filter: brightness(0.5);
+      }
+
+      .cart-quantity {
+        cursor: pointer;
+        position: absolute;
+        top: -1px;
+        right: -5px;
+        background: $primary-color;
+        padding: 0px 5px;
+        color: $white;
+        border-radius: 50%;
+        font-size: 8px;
+      }
+
+      .cart-container {
+        min-width: 300px;
+        min-height: 250px;
+        position: absolute;
+        box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+        z-index: 10;
+        background: $white;
+        transform: translate(-62%, 0);
+        top: 70px;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+
+        @include table {
+          min-width: 400px;
+          left: 50%;
+          top: 84px;
+          transform: translate(-50%, 0);
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+            rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+            rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        @include mobile {
+          min-width: 95%;
+          top: 84px;
+        }
+
+        .no-cart {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          @include fontDefault;
+          color: $text-color;
+          flex-grow: 1;
+          font-weight: 600;
+        }
+
+        .title {
+          border-bottom: 1px solid $border-color;
+          padding: 10px 10px;
+          font-weight: 600;
+          margin-bottom: 0 !important;
+          @include fontDefault;
+        }
+
+        .content-cart {
+          padding: 5px 10px;
+          .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .image-product {
+              width: 35px;
+              height: 35px;
+              border-radius: 5px;
+            }
+
+            .product-info {
+              margin-left: 10px;
+              .product-name {
+                @include fontDefault;
+                color: $text-color;
+              }
+
+              .price {
+                @include fontDefault;
+                color: $text-color;
+              }
+
+              .total-price {
+                font-size: 15px;
+                font-weight: 600;
+              }
+            }
+
+            .btn-delete {
+              width: 11px;
+              height: 14px;
+              cursor: pointer;
+            }
+          }
+
+          .btn-checkout {
+            cursor: pointer;
+            margin-top: 10px;
+            background: $primary-color;
+            padding: 8px;
+            font-weight: 500;
+            color: $white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 7px;
+            @include fontDefault;
+          }
+        }
+      }
+    }
+
+    .avatar {
+      margin-left: 25px;
+      position: relative;
+      .border-avatar {
+        width: 44px;
+        height: 44px;
+        background-color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        &:hover {
+          background-color: $primary-color;
+        }
+      }
+      .img-avatar {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+    }
+  }
+}
